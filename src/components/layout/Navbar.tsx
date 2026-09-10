@@ -66,37 +66,37 @@ export const Navbar: React.FC = () => {
               </button>
             </div>
 
-            {/* Brand Lockup: Logo image + ELHSAN + HAUTE PARFUMERIE */}
+            {/* Brand Logo */}
             <div
               onClick={() => scrollToSection('hero')}
-              className="relative flex items-center gap-3 cursor-pointer group py-1"
+              className="relative flex items-center cursor-pointer group py-1 ml-10"
               aria-label="ELHSAN — Home"
             >
-              {/* Stronger ambient light behind the logo — positioned farther left */}
+              {/* Ambient light directly behind logo */}
               <div
-                className="absolute -left-40 top-1/2 -translate-y-1/2 w-[500px] h-[220px] pointer-events-none"
+                className="absolute -right-20 top-1/2 -translate-y-1/2 w-[250px] h-[220px] pointer-events-none"
                 style={{
                   background:
-                    'radial-gradient(ellipse, rgba(255,245,220,0.52) 0%, rgba(245,220,175,0.32) 25%, rgba(215,175,105,0.16) 48%, rgba(150,105,45,0.06) 65%, transparent 80%)',
-                  filter: 'blur(32px)',
+                    'radial-gradient(ellipse, rgba(241, 241, 239, 0.87) 0%, rgba(240,220,180,0.42) 28%, rgba(210,175,115,0.20) 50%, transparent 78%)',
+                  filter: 'blur(38px)',
                 }}
               />
 
               <img
                 src="/assets/logo.png"
-                alt="ELHSAN Emblem"
-                className="relative z-10 h-14 sm:h-16 lg:h-[68px] w-auto object-contain flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.04]"
+                alt="ELHSAN"
+                className="relative z-10 h-16 sm:h-20 lg:h-24 w-auto object-contain flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.04]"
               />
 
-              <div className="relative z-10 flex flex-col leading-none">
-                <span className="font-serif text-xl sm:text-2xl tracking-[0.25em] font-semibold text-ivory-100 group-hover:text-gold transition-colors duration-300 uppercase leading-none">
-                  ELHSAN
-                </span>
+              {/* <div className="relative z-10 flex flex-col leading-none">
+              <span className="font-serif text-xl sm:text-2xl tracking-[0.25em] font-semibold text-ivory-100 group-hover:text-gold transition-colors duration-300 uppercase leading-none">
+                ELHSAN
+              </span>
 
-                <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.4em] text-gold/85 font-light mt-1.5">
-                  HAUTE PARFUMERIE
-                </span>
-              </div>
+              <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.4em] text-gold/85 font-light mt-1.5">
+                HAUTE PARFUMERIE
+              </span>
+            </div> */}
             </div>
             {/* Desktop: CENTER Navigation Links */}
             <div className="hidden xl:flex items-center space-x-7 text-xs font-medium tracking-[0.2em] uppercase text-ivory-200">
@@ -261,6 +261,6 @@ export const Navbar: React.FC = () => {
           </div>
         )}
       </nav>
-    </header>
+    </header >
   );
 };
