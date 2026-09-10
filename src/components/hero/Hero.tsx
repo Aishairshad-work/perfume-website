@@ -199,7 +199,14 @@ export const Hero: React.FC = () => {
           {/* LEFT SIDE: Luxury Typography & Editorial CTAs - shifted comfortably inward for balance */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-6 text-center lg:text-left pt-6 lg:pt-0 lg:pl-10 xl:pl-16 2xl:pl-20">
             {/* Small Eyebrow Text */}
-           git add . */}
+            {/* <div className="inline-flex items-center justify-center lg:justify-start gap-2.5">
+              <span className="h-[1px] w-8 bg-gold/60" />
+              <span className="text-[11px] uppercase font-semibold tracking-ultra-wide text-gold flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                ELHSAN PARFUMS
+              </span>
+              <span className="h-[1px] w-8 bg-gold/60 lg:hidden" />
+            </div> */}
 
             {/* Large Headline — one row on desktop */}
             <div>
