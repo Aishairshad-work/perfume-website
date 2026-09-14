@@ -23,13 +23,13 @@ import { ToastNotification } from './components/layout/ToastNotification';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-ivory-100 text-espresso-900 selection:bg-gold/30 selection:text-espresso-900">
+    <div className="min-h-screen bg-ivory-50 text-espresso-900 selection:bg-gold-light/40 selection:text-espresso-900">
       {/* Navigation */}
       <Navbar />
 
       {/* Main Luxury Content Flow */}
       <main>
-        {/* 1. Fullscreen Cinematic Dark Hero */}
+        {/* 1. Bright & Airy Luxury Fragrance Hero */}
         <Hero />
 
         {/* 2. Refined Trust & Guarantee Strip */}

@@ -5,18 +5,18 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  /* Custom subtle luxury scrollbar */
+  /* Custom refined light luxury scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #140E0A;
+    background: #F4EFE6;
   }
   ::-webkit-scrollbar-thumb {
-    background: #3D2F27;
+    background: #D4B892;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -26,66 +26,57 @@
 
 @layer utilities {
   .text-gold-gradient {
-    background: linear-gradient(135deg, #FFF1D0 0%, #D4AF37 50%, #A67C1E 100%);
+    background: linear-gradient(135deg, #A88130 0%, #C5A059 50%, #8C6A27 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-silver-gradient {
-    background: linear-gradient(135deg, #FFFFFF 0%, #E5E7EB 50%, #9CA3AF 100%);
+    background: linear-gradient(135deg, #4A4036 0%, #756559 50%, #948478 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .bg-gold-metallic {
-    background: linear-gradient(135deg, #DFC07B 0%, #C5A059 40%, #9B783E 100%);
-  }
-
-  .bg-glass-dark {
-    background: rgba(18, 14, 11, 0.75);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: linear-gradient(135deg, #E5C984 0%, #C5A059 45%, #9B783E 100%);
   }
 
   .bg-glass-light {
-    background: rgba(251, 249, 245, 0.82);
+    background: rgba(253, 251, 247, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
 
   .luxury-shadow {
-    box-shadow: 0 20px 50px -10px rgba(10, 8, 6, 0.15), 0 10px 20px -5px rgba(197, 160, 89, 0.05);
+    box-shadow: 0 15px 35px -10px rgba(23, 18, 15, 0.06), 0 0 20px -5px rgba(197, 160, 89, 0.06);
   }
 
   .luxury-shadow-lg {
-    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.4), 0 0 40px -10px rgba(197, 160, 89, 0.15);
+    box-shadow: 0 25px 50px -15px rgba(23, 18, 15, 0.10), 0 0 35px -10px rgba(197, 160, 89, 0.12);
   }
 
   .bottle-drop-shadow {
-    filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.45)) drop-shadow(0 10px 15px rgba(197, 160, 89, 0.12));
+    filter: drop-shadow(0 22px 28px rgba(38, 31, 27, 0.18)) drop-shadow(0 8px 12px rgba(197, 160, 89, 0.12));
   }
 }
 
-/* ── Hero cinematic background keyframes ──────────────────────────────────── */
+/* ── Light luxury ambient keyframes ────────────────────────────────────────── */
 
-/* Slow warm atmospheric fog drift — right side only */
-@keyframes heroFogDrift {
-  0%   { transform: scale(1)    translateX(0%)    translateY(0%);    opacity: 0.55; }
-  33%  { transform: scale(1.04) translateX(-1.5%) translateY(1%);    opacity: 0.65; }
-  66%  { transform: scale(0.97) translateX(1%)    translateY(-1.2%); opacity: 0.5;  }
-  100% { transform: scale(1.02) translateX(-0.8%) translateY(0.5%);  opacity: 0.6;  }
+/* Gentle warm champagne light drift */
+@keyframes heroLightDrift {
+  0%   { transform: scale(1)    translateX(0%)   translateY(0%);   opacity: 0.7; }
+  50%  { transform: scale(1.05) translateX(-2%)  translateY(1.5%); opacity: 0.9; }
+  100% { transform: scale(0.98) translateX(1.5%) translateY(-1%);  opacity: 0.75; }
 }
 
-/* Upper haze slow oscillation */
-@keyframes heroUpperHaze {
-  0%   { transform: scale(1)    translateY(0%)   translateX(0%);  opacity: 0.35; }
-  50%  { transform: scale(1.06) translateY(1.5%) translateX(1%);  opacity: 0.45; }
-  100% { transform: scale(0.96) translateY(-1%)  translateX(-1%); opacity: 0.38; }
+/* Soft ambient aura pulse */
+@keyframes heroAuraPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.65; }
+  50%      { transform: scale(1.06); opacity: 0.85; }
 }
 
-/* Floor bloom gentle pulse */
-@keyframes heroFloorBloom {
-  0%   { opacity: 0.75; transform: scaleX(1)    scaleY(1);    }
-  50%  { opacity: 0.95; transform: scaleX(1.06) scaleY(1.08); }
-  100% { opacity: 0.8;  transform: scaleX(0.97) scaleY(1.02); }
+/* Soft contact pedestal shadow pulse */
+@keyframes heroPedestalPulse {
+  0%, 100% { transform: scaleX(1) scaleY(1); opacity: 0.7; }
+  50%      { transform: scaleX(1.04) scaleY(1.05); opacity: 0.85; }
 }

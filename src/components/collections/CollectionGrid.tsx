@@ -12,71 +12,73 @@ export const CollectionGrid: React.FC = () => {
   };
 
   return (
-    <section id="collections" className="py-24 bg-ivory-100">
+    <section id="collections" className="py-24 bg-ivory-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-xs uppercase tracking-widest text-gold font-semibold mb-3">
-            Explore the House
-          </p>
-          <h2 className="font-serif text-4xl sm:text-5xl text-espresso-900 tracking-tight font-light">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="h-[1px] w-6 bg-gold/60" />
+            <span className="text-[11px] uppercase tracking-ultra-wide text-gold-muted font-semibold flex items-center gap-1.5">
+              Explore the House
+            </span>
+            <span className="h-[1px] w-6 bg-gold/60" />
+          </div>
+
+          <h2 className="font-serif text-4xl sm:text-5xl text-espresso-900 tracking-tight font-light leading-tight">
             Shop by Collection
           </h2>
-          <div className="h-[1px] w-24 bg-gold/50 mx-auto mt-6" />
+          <p className="text-sm sm:text-base text-espresso-600 font-light mt-3 leading-relaxed max-w-xl mx-auto">
+            From concentrated pulse-point oils to monumental extrait flacons, explore the distinct expressions of ELHSAN.
+          </p>
+          <div className="h-[1px] w-20 bg-gold/50 mx-auto mt-6" />
         </div>
 
-        {/*
-          ── GRID ──────────────────────────────────────────────────────────────
-          grid-rows-[1fr] ensures all 4 cards stretch to the same height.
-          Each card is a flex-col so image-zone + text-zone stack vertically
-          and NEVER overlap.
-        */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 items-stretch">
+        {/* ── GRID ── equal height flex cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 items-stretch">
           {COLLECTIONS_DATA.map((col) => (
             <div
               key={col.id}
-              className="group flex flex-col bg-espresso-900 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-transparent hover:border-gold/40"
+              className="group flex flex-col bg-white cursor-pointer shadow-[0_4px_20px_rgba(23,18,15,0.03)] hover:shadow-[0_12px_32px_rgba(197,160,89,0.12)] transition-all duration-500 overflow-hidden border border-ivory-300 hover:border-gold/50 h-full"
               onClick={scrollToProducts}
             >
               {/* ── IMAGE ZONE: fixed height, bottle stays here ── */}
-              <div className="relative w-full bg-espresso-900 overflow-hidden flex-shrink-0" style={{ height: '280px' }}>
+              <div className="relative w-full bg-[#FAF7F2] overflow-hidden flex-shrink-0 flex items-center justify-center border-b border-ivory-200/70" style={{ height: '275px' }}>
                 {/* Fragrance count badge — top-right inside image zone */}
-                <span className="absolute top-4 right-4 z-10 text-[10px] bg-gold/20 backdrop-blur-sm border border-gold/30 text-gold px-2.5 py-1 rounded-full">
+                <span className="absolute top-3.5 right-3.5 z-10 text-[10px] bg-white/90 backdrop-blur-xs border border-gold/30 text-espresso-800 px-2.5 py-1 rounded-full shadow-xs font-medium">
                   {col.productCount} Fragrances
                 </span>
 
-                {/* Bottle image — contained, padded, never exits this zone */}
-                <img
-                  src={col.image}
-                  alt={col.title}
-                  className="w-full h-full object-contain p-8 transition-transform duration-700 group-hover:scale-[1.06] filter drop-shadow-[0_12px_28px_rgba(0,0,0,0.5)]"
-                />
-
-                {/* Very subtle bottom fade that bleeds into text zone */}
-                <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-espresso-900 to-transparent pointer-events-none" />
+                {/* Bottle image — contained, padded */}
+                <div className="w-full h-full flex items-center justify-center p-7">
+                  <img
+                    src={col.image}
+                    alt={col.title}
+                    className="max-h-[190px] w-auto object-contain transition-transform duration-700 group-hover:scale-[1.06] bottle-drop-shadow"
+                  />
+                </div>
               </div>
 
               {/* ── TEXT ZONE: completely separate, below image ── */}
-              <div className="flex flex-col flex-1 px-5 pt-4 pb-5 border-t border-gold/10">
+              <div className="flex flex-col flex-1 px-5 pt-4 pb-5">
                 {/* Eyebrow */}
-                <p className="text-[10px] uppercase tracking-widest text-gold font-semibold mb-2">
+                <p className="text-[10px] uppercase tracking-widest text-gold-muted font-semibold mb-1.5">
                   {col.tagline}
                 </p>
 
                 {/* Title */}
-                <h3 className="font-serif text-[22px] text-ivory-50 font-semibold tracking-wide uppercase leading-tight mb-2">
+                <h3 className="font-serif text-[20px] text-espresso-900 font-medium tracking-wide uppercase leading-tight mb-2 group-hover:text-gold transition-colors">
                   {col.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs text-ivory-300 font-light leading-relaxed line-clamp-2 mb-0">
+                <p className="text-xs text-espresso-500 font-light leading-relaxed line-clamp-2 mb-0">
                   {col.description}
                 </p>
 
-                {/* Spacer — pushes CTA to bottom */}
+                {/* Spacer */}
                 <div className="flex-1 min-h-[12px]" />
 
                 {/* CTA — anchored at bottom */}
-                <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-gold font-semibold group-hover:gap-3 transition-all duration-300 pt-4 border-t border-gold/10 mt-2">
+                <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-espresso-900 font-semibold group-hover:text-gold group-hover:gap-2.5 transition-all duration-300 pt-3.5 border-t border-ivory-200 mt-2">
                   {col.linkText}
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </div>

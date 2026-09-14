@@ -11,42 +11,45 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-espresso-950 text-ivory-300 border-t border-gold/15">
+    <footer className="bg-[#F7F3EB] text-espresso-700 border-t border-gold/25">
       {/* Main Footer */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-3 mb-4">
               <img
                 src="/assets/logo.png"
                 alt="ELHSAN Logo"
-                className="w-8 h-8 object-contain filter drop-shadow-[0_2px_8px_rgba(197,160,89,0.3)]"
+                className="h-10 w-auto object-contain filter drop-shadow-xs"
               />
-              <span className="font-serif text-2xl tracking-[0.25em] text-ivory-100 uppercase">
-                ELHSAN
-              </span>
+              <div className="flex flex-col justify-center leading-none">
+                <span className="font-serif text-xl tracking-[0.24em] font-medium text-espresso-900 uppercase">
+                  ELHSAN
+                </span>
+                <span className="text-[8px] uppercase tracking-[0.38em] text-gold-muted font-medium mt-1">
+                  HAUTE PARFUMERIE
+                </span>
+              </div>
             </div>
-            <p className="text-[10px] uppercase tracking-ultra-wide text-gold mb-5">
-              Haute Parfumerie
-            </p>
-            <p className="text-sm text-ivory-400 font-light leading-relaxed mb-6">
+
+            <p className="text-sm text-espresso-600 font-light leading-relaxed mb-6">
               Born from a singular pursuit — the creation of fragrances that transcend the ordinary.
               Artisanal. Purposeful. Eternal.
             </p>
 
             {/* Newsletter */}
             <div>
-              <p className="text-[10px] uppercase tracking-widest text-ivory-300 mb-3 font-medium">
+              <p className="text-[10px] uppercase tracking-widest text-espresso-800 mb-2.5 font-semibold">
                 Join the Inner Circle
               </p>
-              <div className="flex">
+              <div className="flex shadow-xs">
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="flex-1 px-3 py-2.5 bg-espresso-800 border border-gold/20 text-ivory-100 text-xs placeholder:text-ivory-500 focus:outline-none focus:border-gold transition-colors"
+                  className="flex-1 px-3.5 py-2.5 bg-white border border-gold/30 text-espresso-900 text-xs placeholder:text-espresso-400 focus:outline-none focus:border-gold transition-colors"
                 />
-                <button className="px-4 py-2.5 bg-gold hover:bg-gold-light text-espresso-900 text-xs font-bold uppercase transition-colors">
+                <button className="px-4.5 py-2.5 bg-espresso-900 hover:bg-gold text-ivory-50 hover:text-espresso-900 text-xs font-bold uppercase transition-colors cursor-pointer">
                   Join
                 </button>
               </div>
@@ -55,7 +58,7 @@ export const Footer: React.FC = () => {
 
           {/* Navigation */}
           <div>
-            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold font-semibold mb-5">
+            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold-muted font-semibold mb-5">
               The House
             </h4>
             <ul className="space-y-3 text-sm">
@@ -70,7 +73,7 @@ export const Footer: React.FC = () => {
                 <li key={link.label}>
                   <button
                     onClick={() => scrollToSection(link.section)}
-                    className="text-ivory-400 hover:text-gold transition-colors cursor-pointer text-sm font-light"
+                    className="text-espresso-600 hover:text-espresso-900 hover:underline transition-colors cursor-pointer text-sm font-light"
                   >
                     {link.label}
                   </button>
@@ -81,10 +84,10 @@ export const Footer: React.FC = () => {
 
           {/* Customer Care */}
           <div>
-            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold font-semibold mb-5">
+            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold-muted font-semibold mb-5">
               Client Services
             </h4>
-            <ul className="space-y-3 text-sm text-ivory-400 font-light">
+            <ul className="space-y-3 text-sm text-espresso-600 font-light">
               <li>Free Express Delivery</li>
               <li>Artisanal Gift Packaging</li>
               <li>Cash on Delivery (COD)</li>
@@ -96,21 +99,21 @@ export const Footer: React.FC = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold font-semibold mb-5">
+            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold-muted font-semibold mb-5">
               Contact the Atelier
             </h4>
             <ul className="space-y-4 text-sm">
               <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <span className="text-ivory-400 font-light">+92 300 0000000</span>
+                <Phone className="w-4 h-4 text-gold-muted shrink-0 mt-0.5" />
+                <span className="text-espresso-600 font-light">+92 300 0000000</span>
               </li>
               <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <span className="text-ivory-400 font-light">hello@elhsan.com</span>
+                <Mail className="w-4 h-4 text-gold-muted shrink-0 mt-0.5" />
+                <span className="text-espresso-600 font-light">hello@elhsan.com</span>
               </li>
               <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <span className="text-ivory-400 font-light">Lahore, Pakistan</span>
+                <MapPin className="w-4 h-4 text-gold-muted shrink-0 mt-0.5" />
+                <span className="text-espresso-600 font-light">Lahore, Pakistan</span>
               </li>
             </ul>
 
@@ -125,7 +128,7 @@ export const Footer: React.FC = () => {
                   key={label}
                   href="#"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full border border-gold/30 flex items-center justify-center text-ivory-400 hover:text-gold hover:border-gold hover:bg-gold/10 transition-all duration-300"
+                  className="w-9 h-9 rounded-full border border-gold/35 bg-white flex items-center justify-center text-espresso-700 hover:text-espresso-900 hover:border-gold hover:bg-champagne-light/50 transition-all duration-300 shadow-xs"
                 >
                   <Icon className="w-4 h-4" />
                 </a>
@@ -136,16 +139,16 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/5 py-5 px-4">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-ivory-500">
+      <div className="border-t border-ivory-300/80 py-5 px-4 bg-[#F2EDE3]">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-espresso-500">
           <div className="flex items-center gap-1.5">
-            <Sparkles className="w-3 h-3 text-gold" />
-            <span>© {new Date().getFullYear()} ELHSAN Haute Parfumerie. All rights reserved.</span>
+            <Sparkles className="w-3 h-3 text-gold-muted" />
+            <span>&copy; {new Date().getFullYear()} ELHSAN Haute Parfumerie. All rights reserved.</span>
           </div>
-          <div className="flex gap-6">
-            <span className="hover:text-gold transition-colors cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-gold transition-colors cursor-pointer">Terms of Service</span>
-            <span className="hover:text-gold transition-colors cursor-pointer">Ingredient Policy</span>
+          <div className="flex gap-6 font-medium">
+            <span className="hover:text-espresso-900 transition-colors cursor-pointer">Privacy Policy</span>
+            <span className="hover:text-espresso-900 transition-colors cursor-pointer">Terms of Service</span>
+            <span className="hover:text-espresso-900 transition-colors cursor-pointer">Ingredient Policy</span>
           </div>
         </div>
       </div>
