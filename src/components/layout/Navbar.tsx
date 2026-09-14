@@ -36,23 +36,24 @@ export const Navbar: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
       {/* Top Announcement Bar - Light Luxury Champagne */}
-      <div className="bg-[#F6EFE6] text-espresso-800 border-b border-gold/25 text-[11px] tracking-widest-luxury uppercase py-2 px-4 text-center overflow-hidden relative">
+      <div className="bg-[#000000] text-espresso-800 border-b border-gold/25 text-[11px] tracking-widest-luxury uppercase py-2 px-4 text-center overflow-hidden relative">
         <div className="flex items-center justify-center gap-2">
-          <Sparkles className="w-3 h-3 text-gold-muted animate-pulse" />
-          <span className="font-medium">
+          <Sparkles className="w-3 h-3 text-white animate-pulse" />
+
+          <span className="font-medium text-white">
             Artisanal Gift Box &amp; Velvet Pouch With Every Creation &bull; Complimentary Insured Delivery
           </span>
-          <Sparkles className="w-3 h-3 text-gold-muted animate-pulse" />
+
+          <Sparkles className="w-3 h-3 text-gold-white animate-pulse" />
         </div>
       </div>
 
       {/* Main Glass Navbar - Light Luxury Ivory */}
       <nav
-        className={`transition-all duration-500 ${
-          isScrolled
+        className={`transition-all duration-500 ${isScrolled
             ? 'bg-ivory-50/95 backdrop-blur-xl border-b border-ivory-300/80 py-3 shadow-[0_4px_25px_rgba(23,18,15,0.04)]'
             : 'bg-ivory-50/80 backdrop-blur-md border-b border-gold/15 py-3.5 sm:py-4'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -86,16 +87,11 @@ export const Navbar: React.FC = () => {
                 <img
                   src="/assets/logo.png"
                   alt="ELHSAN"
-                  className="h-12 sm:h-14 lg:h-16 w-auto object-contain flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.03]"
+                 className="h-14 sm:h-16 lg:h-20 w-auto object-contain flex-shrink-0 transition-transform duration-500 group-hover:scale-[1.03]"
                 />
 
-                <div className="flex flex-col justify-center leading-none">
-                  <span className="font-serif text-lg sm:text-xl lg:text-2xl tracking-[0.24em] font-medium text-espresso-900 group-hover:text-gold transition-colors duration-300 uppercase leading-none">
-                    ELHSAN
-                  </span>
-                  <span className="text-[8px] sm:text-[9px] uppercase tracking-[0.38em] text-gold-muted font-medium mt-1 leading-none">
-                    HAUTE PARFUMERIE
-                  </span>
+                <div className="relative z-10 flex flex-col leading-none translate-y-3">
+
                 </div>
               </div>
             </div>
