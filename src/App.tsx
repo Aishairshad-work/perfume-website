@@ -1,83 +1,108 @@
-import React from 'react';
-import { Navbar } from './components/layout/Navbar';
+import React, { useState } from 'react';
+import { LuxuryPreloader } from './components/layout/LuxuryPreloader';
 import { Hero } from './components/hero/Hero';
-import { TrustStrip } from './components/layout/TrustStrip';
-import { CollectionGrid } from './components/collections/CollectionGrid';
 import { BrandStory } from './components/editorial/BrandStory';
 import { ProductGrid } from './components/products/ProductGrid';
-import { CloneCampaign } from './components/editorial/CloneCampaign';
 import { Craftsmanship } from './components/editorial/Craftsmanship';
-import { SecondCloneCampaign } from './components/editorial/SecondCloneCampaign';
+import { RefinedMoments } from './components/editorial/RefinedMoments';
 import { FragranceExperience } from './components/editorial/FragranceExperience';
-import { WhyElhsan } from './components/editorial/WhyElhsan';
-import { ReviewsSection } from './components/editorial/ReviewsSection';
-import { NewsletterCTA } from './components/editorial/NewsletterCTA';
+import { AtelierLocation } from './components/editorial/AtelierLocation';
+import { HauteFAQ } from './components/editorial/HauteFAQ';
 import { Footer } from './components/layout/Footer';
 
+import { ConciergeDrawer } from './components/layout/ConciergeDrawer';
 import { CartDrawer } from './components/cart/CartDrawer';
 import { CheckoutModal } from './components/checkout/CheckoutModal';
 import { ProductDetailModal } from './components/modals/ProductDetailModal';
 import { SearchModal } from './components/search/SearchModal';
 import { WishlistDrawer } from './components/modals/WishlistDrawer';
-import { ToastNotification } from './components/layout/ToastNotification';
+import { CartToast } from './components/layout/CartToast';
 
 export const App: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isConciergeOpen, setIsConciergeOpen] = useState(false);
+  const [toastProduct, setToastProduct] = useState<{
+    name: string;
+    price: string | number;
+    image: string;
+  } | null>(null);
+  const [isToastVisible, setIsToastVisible] = useState(false);
+
+  const showToast = (prod: { name: string; price: string | number; image: string }) => {
+    setToastProduct(prod);
+    setIsToastVisible(true);
+  };
+
+  const handleNavigate = (id: string) => {
+    setIsConciergeOpen(false);
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-ivory-50 text-espresso-900 selection:bg-gold-light/40 selection:text-espresso-900">
-      {/* Navigation */}
-      <Navbar />
+    <div className="site-canvas">
+      {/* Luxury Preloader Entrance */}
+      {isLoading && (
+        <LuxuryPreloader
+          minDuration={2800}
+          onComplete={() => setIsLoading(false)}
+        />
+      )}
 
-      {/* Main Luxury Content Flow */}
-      <main>
-        {/* 1. Bright & Airy Luxury Fragrance Hero */}
-        <Hero />
+      {/* Main Luxury Site Canvas */}
+      <div className={`site-frame ${!isLoading ? 'site-frame-visible' : ''}`}>
+        {/* 1. Haute Parchment Hero with Integrated Navbar */}
+        <Hero onOpenConcierge={() => setIsConciergeOpen(true)} />
 
-        {/* 2. Refined Trust & Guarantee Strip */}
-        <TrustStrip />
-
-        {/* 3. Shop by Collection (Editorial Tiles) */}
-        <CollectionGrid />
-
-        {/* 4. Brand Story / The Atelier (Split Screen Editorial) */}
+        {/* 2. Brand Story / The Atelier Asymmetrical 3-Photo Collage (#about) */}
         <BrandStory />
 
-        {/* 5. Best Selling Products Catalog & Filter Tabs */}
-        <ProductGrid />
+        {/* 3. Curated Recommendation & Products Catalog (#collection) */}
+        <ProductGrid onAddToCartToast={showToast} />
 
-        {/* 6. Character Campaign 1: "WEAR YOUR SIGNATURE" (clone.png) */}
-        <CloneCampaign />
-
-        {/* 7. Artisanal Craftsmanship ("Behind Every Drop") */}
+        {/* 4. Scent Craftsmanship & Interactive Anatomy (#craftsmanship) */}
         <Craftsmanship />
 
-        {/* 8. Character Campaign 2: "MAKE IT YOURS." (clone1.png) */}
-        <SecondCloneCampaign />
+        {/* 5. Refined Moments Fragrances Grid (#moments) */}
+        <RefinedMoments onExploreCollection={() => handleNavigate('collection')} />
 
-        {/* 9. Immersive Dark Fragrance Experience ("MORE THAN A FRAGRANCE.") */}
-        <FragranceExperience />
+        {/* 6. Parallax CTA Banner (#experience) */}
+        <FragranceExperience onExplore={() => handleNavigate('collection')} />
 
-        {/* 10. The 4 Benefits (Why ELHSAN) */}
-        <WhyElhsan />
+        {/* 7. Flagship Boutique Atelier Location (#atelier) */}
+        <AtelierLocation />
 
-        {/* 11. Connoisseur Acclaims / Client Reviews */}
-        <ReviewsSection />
+        {/* 8. Haute FAQ Section (#faq) */}
+        <HauteFAQ />
 
-        {/* 12. Final Cinematic CTA Newsletter */}
-        <NewsletterCTA />
-      </main>
-
-      {/* 13. Dark Haute Parfumerie Footer */}
-      <div id="footer">
+        {/* 9. Haute Parfumerie Footer (#contact) */}
         <Footer />
       </div>
 
-      {/* Global E-Commerce Overlays & Modals */}
+      {/* Luxury Concierge & Menu Slide-in Drawer */}
+      <ConciergeDrawer
+        isOpen={isConciergeOpen}
+        onClose={() => setIsConciergeOpen(false)}
+        onNavigate={handleNavigate}
+      />
+
+      {/* Luxury Quick View Product Detail Modal */}
+      <ProductDetailModal onAddToCartToast={showToast} />
+
+      {/* Floating Add to Cart Toast Notification */}
+      <CartToast
+        product={toastProduct}
+        isVisible={isToastVisible}
+        onClose={() => setIsToastVisible(false)}
+      />
+
+      {/* Global E-Commerce Drawers & Modals */}
       <CartDrawer />
       <CheckoutModal />
-      <ProductDetailModal />
-      <SearchModal />
       <WishlistDrawer />
-      <ToastNotification />
+      <SearchModal />
     </div>
   );
 };

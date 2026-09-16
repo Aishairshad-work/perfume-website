@@ -1,99 +1,193 @@
-import React, { useState, useMemo } from 'react';
-import { Sparkles, SlidersHorizontal } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ShoppingBag, Eye } from 'lucide-react';
 import { PERFUMES_DATA } from '../../data/perfumesData';
-import { ProductCard } from './ProductCard';
+import { Product } from '../../types/perfume';
+import { useCart } from '../../context/CartContext';
+import { useCurrency } from '../../context/CurrencyContext';
 
-export const ProductGrid: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('all');
+interface ProductGridProps {
+  onAddToCartToast?: (product: { name: string; price: string | number; image: string }) => void;
+}
 
-  const tabs = [
-    { id: 'all', label: 'All Creations' },
-    { id: 'bestseller', label: 'Best Sellers' },
-    { id: 'edp', label: 'Eau de Parfum' },
-    { id: 'rollon', label: 'Concentré Oils' },
-    { id: 'unisex', label: 'Unisex' },
-    { id: 'men', label: 'Men' },
-    { id: 'women', label: 'Women' }
+export const ProductGrid: React.FC<ProductGridProps> = ({ onAddToCartToast }) => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [addedId, setAddedId] = useState<string | null>(null);
+
+  const { addToCart, setQuickViewProduct } = useCart();
+  const { formatPrice } = useCurrency();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const categories = [
+    { id: 'all', label: `All Creations (${PERFUMES_DATA.length})` },
+    { id: 'oud', label: 'Oud & Amber' },
+    { id: 'fresh', label: 'Fresh & Marine' },
+    { id: 'floral', label: 'Floral & Rose' },
+    { id: 'concentre', label: 'Concentré Roll-Ons' }
   ];
 
-  const filteredProducts = useMemo(() => {
-    switch (activeTab) {
-      case 'bestseller':
-        return PERFUMES_DATA.filter((p) => p.featured || p.badge?.includes('BEST') || p.badge?.includes('ICONIC'));
-      case 'edp':
-        return PERFUMES_DATA.filter((p) => p.type === 'Eau de Parfum' || p.type === 'Parfum Extrait');
-      case 'rollon':
-        return PERFUMES_DATA.filter((p) => p.type === 'Concentré Roll-On');
-      case 'unisex':
-        return PERFUMES_DATA.filter((p) => p.gender === 'Unisex');
-      case 'men':
-        return PERFUMES_DATA.filter((p) => p.gender === 'Men');
-      case 'women':
-        return PERFUMES_DATA.filter((p) => p.gender === 'Women');
-      default:
-        return PERFUMES_DATA;
+  const filteredProducts = PERFUMES_DATA.filter(product => {
+    if (activeCategory === 'all') return true;
+    if (activeCategory === 'oud') {
+      return product.category.toLowerCase().includes('oud') || product.category.toLowerCase().includes('amber');
     }
-  }, [activeTab]);
+    if (activeCategory === 'fresh') {
+      return product.category.toLowerCase().includes('fresh') || product.category.toLowerCase().includes('marine') || product.category.toLowerCase().includes('citrus');
+    }
+    if (activeCategory === 'floral') {
+      return product.category.toLowerCase().includes('floral') || product.category.toLowerCase().includes('rose');
+    }
+    if (activeCategory === 'concentre') {
+      return product.type.toLowerCase().includes('roll-on') || product.type.toLowerCase().includes('concentré');
+    }
+    return true;
+  });
+
+  const handleQuickAdd = (e: React.MouseEvent, product: Product) => {
+    e.stopPropagation();
+    addToCart(product, 1);
+    setAddedId(product.id);
+    if (onAddToCartToast) {
+      onAddToCartToast({
+        name: product.name,
+        price: formatPrice(product.price, product.pricePKR),
+        image: product.image
+      });
+    }
+    setTimeout(() => setAddedId(null), 1800);
+  };
+
+  const getPedestalTone = (index: number) => {
+    const tones = ['#e6d8c3', '#ded1be', '#e2d5c1', '#dbcfbb', '#ebdcc8', '#dfd3bf'];
+    return tones[index % tones.length];
+  };
 
   return (
-    <section id="products" className="py-24 bg-[#FAF7F2] relative border-t border-ivory-300/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="h-[1px] w-6 bg-gold/60" />
-            <span className="text-[11px] uppercase tracking-ultra-wide text-gold-muted font-semibold flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-gold" />
-              Artisanal Olfactory Catalog
-            </span>
-            <span className="h-[1px] w-6 bg-gold/60" />
+    <section
+      className={`editorial-collection-section ${isInView ? 'in-view' : ''}`}
+      id="collection"
+      ref={sectionRef}
+    >
+      <div className="collection-bg-glow" />
+
+      <div className="collection-wrapper">
+        {/* Editorial Header Row */}
+        <div className="editorial-header-row">
+          <div className="editorial-header-left">
+            <div className="kicker-badge">
+              <span className="editorial-kicker font-sans">CURATED FOR NOBILITY</span>
+            </div>
+            <h2 className="editorial-title font-cinzel">
+              <span className="title-line">Our recommendation for</span>
+              <span className="title-line title-highlight">your personality</span>
+            </h2>
           </div>
 
-          <h2 className="font-serif text-4xl sm:text-5xl text-espresso-900 tracking-tight font-light leading-tight">
-            Best Selling Products
-          </h2>
-          <p className="text-sm sm:text-base text-espresso-600 font-light mt-4 leading-relaxed">
-            Distilled from rare botanical absolutes, cold-pressed citrus, and aged oriental resins.
-            Every ELHSAN creation is designed to linger as an indelible memory.
-          </p>
-          <div className="h-[1px] w-20 bg-gold/50 mx-auto mt-6" />
+          <div className="editorial-header-right">
+            <div className="tabs-scroll-container">
+              <div className="editorial-tabs-track">
+                {categories.map(cat => (
+                  <button
+                    key={cat.id}
+                    className={`editorial-tab-pill ${activeCategory === cat.id ? 'active-pill' : ''}`}
+                    onClick={() => setActiveCategory(cat.id)}
+                  >
+                    <span>{cat.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Filter Tabs Strip */}
-        <div className="flex items-center justify-center mb-12 overflow-x-auto pb-3 scrollbar-none">
-          <div className="inline-flex items-center gap-1.5 p-1.5 bg-white/80 rounded-full border border-gold/25 shadow-xs">
-            {tabs.map((tab) => {
-              const isActive = activeTab === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 sm:px-5 py-2 text-xs uppercase tracking-wider rounded-full transition-all duration-300 whitespace-nowrap cursor-pointer ${
-                    isActive
-                      ? 'bg-espresso-900 text-gold shadow-sm font-semibold'
-                      : 'text-espresso-600 hover:text-espresso-900 hover:bg-champagne-light/50 font-medium'
-                  }`}
+        {/* Editorial Products Grid */}
+        <div className="editorial-products-grid">
+          {filteredProducts.map((product, idx) => (
+            <div
+              key={product.id}
+              className="editorial-product-card"
+              style={{ animationDelay: `${idx * 0.12}s` }}
+              onClick={() => setQuickViewProduct(product)}
+            >
+              {/* Product Frame with Lighting & Pedestal */}
+              <div className="editorial-image-frame">
+                <div className="editorial-sunlight-ray" />
+                <div className="editorial-backdrop-drape" />
+
+                {/* Badge if present */}
+                {product.badge && (
+                  <span className="absolute top-3 left-3 z-20 px-2.5 py-1 text-[10px] font-sans font-bold tracking-widest uppercase bg-[#1a1610]/80 text-[#dfb758] backdrop-blur-md rounded border border-[#dfb758]/30">
+                    {product.badge}
+                  </span>
+                )}
+
+                {/* Bottle Display */}
+                <div className="editorial-bottle-stage">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="editorial-bottle-img"
+                  />
+                </div>
+
+                {/* Travertine Pedestal Slab */}
+                <div
+                  className="travertine-pedestal-slab"
+                  style={{ backgroundColor: getPedestalTone(idx) }}
                 >
-                  {tab.label}
+                  <div className="slab-top-bevel" />
+                  <div className="bottle-travertine-shadow" />
+                </div>
+
+                {/* Quick Add Button */}
+                <button
+                  className={`editorial-quick-add ${addedId === product.id ? 'is-added' : ''}`}
+                  onClick={e => handleQuickAdd(e, product)}
+                  aria-label={`Add ${product.name} to bag`}
+                >
+                  <ShoppingBag size={13} />
+                  <span>{addedId === product.id ? 'ADDED' : 'ADD TO BAG'}</span>
                 </button>
-              );
-            })}
-          </div>
-        </div>
+              </div>
 
-        {/* Products Count Indicator */}
-        <div className="flex items-center justify-between text-xs text-espresso-500 mb-6 px-1">
-          <span className="uppercase tracking-widest text-[11px] flex items-center gap-1.5 font-medium">
-            <SlidersHorizontal className="w-3.5 h-3.5 text-gold-muted" />
-            Showing {filteredProducts.length} Exceptional {filteredProducts.length === 1 ? 'Flacon' : 'Flacons'}
-          </span>
-          <span className="font-light italic text-[11px] text-espresso-400">Hand-blended in small artisan batches</span>
-        </div>
+              {/* Product Card Metadata */}
+              <div className="editorial-meta-row">
+                <div className="meta-left-details">
+                  <div className="product-name-urdu">
+                    <span className="name-en font-cinzel">{product.name}</span>
+                  </div>
+                  <p className="product-olfactory-notes font-sans">
+                    {product.category}
+                  </p>
+                </div>
 
-        {/* Product Cards Grid - equal heights and responsive */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-7 items-stretch">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+                <div className="meta-right-price">
+                  <span className="product-exact-price font-sans">
+                    {formatPrice(product.price, product.pricePKR)}
+                  </span>
+                  <span className="product-volume-label font-sans">
+                    {product.volume}
+                  </span>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

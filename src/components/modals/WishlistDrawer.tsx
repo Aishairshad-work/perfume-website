@@ -58,7 +58,7 @@ export const WishlistDrawer: React.FC = () => {
                 <button
                   onClick={() => {
                     setIsWishlistOpen(false);
-                    const el = document.getElementById('products');
+                    const el = document.getElementById('collection') || document.getElementById('products');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                   className="mt-2 px-6 py-3 bg-espresso-950 hover:bg-black text-white text-xs font-semibold uppercase tracking-widest transition-all shadow-sm cursor-pointer"

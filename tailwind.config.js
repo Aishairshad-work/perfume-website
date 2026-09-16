@@ -49,9 +49,12 @@ export default {
         },
       },
       fontFamily: {
-        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        serif: ['Cinzel', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        cinzel: ['Cinzel', 'serif'],
+        editorial: ['"Cormorant Garamond"', 'serif'],
         cormorant: ['"Cormorant Garamond"', 'serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Montserrat', '"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
       },
       letterSpacing: {
         'widest-luxury': '0.25em',

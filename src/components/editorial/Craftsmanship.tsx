@@ -1,94 +1,159 @@
-import React from 'react';
-import { Leaf, Award, Flame, Package } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
 
 export const Craftsmanship: React.FC = () => {
-  const steps = [
-    {
-      icon: Leaf,
-      step: '01',
-      title: 'Rare Botanical Sourcing',
-      text: 'Our master parfumeur hand-selects ingredients from Grasse, Kannauj, Turkey, and Assam. Each raw material undergoes rigorous quality testing before approval.'
-    },
-    {
-      icon: Flame,
-      step: '02',
-      title: 'Cold Press & Distillation',
-      text: 'Essential oils are extracted using cold press or steam distillation at precise temperatures, preserving the delicate aromatic molecules in their most expressive form.'
-    },
-    {
-      icon: Award,
-      step: '03',
-      title: 'Six-Week Maceration',
-      text: 'Accords rest and deepen for a minimum of six weeks in temperature-controlled ceramic vessels. Time is the most precious ingredient in every ELHSAN creation.'
-    },
-    {
-      icon: Package,
-      step: '04',
-      title: 'Artisanal Presentation',
-      text: 'Each flacon is individually inspected, hand-sealed, and presented in signature burlap pouches with a gold-stamped ELHSAN crest — ready to be gifted or treasured.'
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -60px 0px' }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
-  ];
+
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.top < vh && rect.bottom > 0) {
+        const offset = (rect.top + rect.height / 2 - vh / 2) / vh;
+        setMouseOffset({ x: offset * -32, y: offset * -3.5 });
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <section id="craftsmanship" className="bg-ivory-50 py-24 border-t border-ivory-300/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-16 items-center">
-          {/* Left: Photography Grid */}
-          <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="overflow-hidden h-64 sm:h-80 shadow-md">
-                <img
-                  src="/assets/content.JPG"
-                  alt="ELHSAN artisan dispatch workshop"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                />
+    <section
+      className={`scent-elegance-section ${isInView ? 'in-view' : ''}`}
+      id="craftsmanship"
+      ref={sectionRef}
+    >
+      <div className="scent-elegance-container">
+        {/* Header Block */}
+        <div className="scent-elegance-header">
+          <span className="scent-kicker font-sans">CRAFTSMANSHIP &amp; PURITY</span>
+          <h2 className="scent-elegance-title font-cinzel">
+            Scent <span className="title-of-italic font-editorial">of</span> Elegance
+          </h2>
+          <p className="scent-elegance-subtitle font-sans">
+            Every flacon of ELHSAN is a testament to uncompromising haute perfumery, formulated with rare botanical essences and presented with sustainable luxury.
+          </p>
+        </div>
+
+        {/* 3-Column Scent Anatomy Stage */}
+        <div className={`scent-anatomy-stage ${isInView ? 'in-view' : ''}`}>
+          {/* Left Features Column */}
+          <div className="anatomy-features-col left-features">
+            {/* Feature 1 */}
+            <div className="anatomy-feature-item left-item item-top point-anim-1">
+              <div className="feature-text-block">
+                <h4 className="feature-item-heading font-cinzel">14+ Hour Enduring Sillage</h4>
+                <p className="feature-item-desc font-sans">
+                  High-concentration artisan formulation designed to project magnetic confidence.
+                </p>
               </div>
-              <div className="overflow-hidden h-64 sm:h-80 mt-8 shadow-md">
-                <img
-                  src="/assets/content2.jpg"
-                  alt="Black marble pedestal with gold ELHSAN crest"
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                />
+              <div className="feature-connector-line left-line">
+                <span className="connector-dot" />
               </div>
             </div>
-            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md border border-gold/40 px-6 py-3.5 text-center shadow-xl whitespace-nowrap">
-              <p className="font-serif text-gold-muted text-lg font-semibold">Certified</p>
-              <p className="text-[10px] uppercase tracking-widest text-espresso-600 mt-0.5 font-medium">Cruelty Free &bull; Phthalate Free</p>
+
+            {/* Feature 3 */}
+            <div className="anatomy-feature-item left-item item-middle point-anim-3">
+              <div className="feature-text-block">
+                <h4 className="feature-item-heading font-cinzel">Direct Delivery to Your Door</h4>
+                <p className="feature-item-desc font-sans">
+                  Complimentary luxury gift box, velvet pouch, and insured shipping.
+                </p>
+              </div>
+              <div className="feature-connector-line left-line">
+                <span className="connector-dot" />
+              </div>
+            </div>
+
+            {/* Feature 5 */}
+            <div className="anatomy-feature-item left-item item-bottom point-anim-5">
+              <div className="feature-text-block">
+                <h4 className="feature-item-heading font-cinzel">Eco-Friendly Crafting</h4>
+                <p className="feature-item-desc font-sans">
+                  Heavyweight architectural glass flacons and recyclable bespoke packaging.
+                </p>
+              </div>
+              <div className="feature-connector-line left-line">
+                <span className="connector-dot" />
+              </div>
             </div>
           </div>
 
-          {/* Right: Process Steps */}
-          <div>
-            <p className="text-xs uppercase tracking-widest text-gold-muted font-semibold mb-3">
-              The Artisanal Process
-            </p>
-            <h2 className="font-serif text-4xl sm:text-5xl text-espresso-900 font-light leading-tight mb-8">
-              Behind Every
-              <br />
-              <span className="italic text-gold-gradient font-serif">Drop</span>
-            </h2>
+          {/* Center Flacon Showcase with Glow */}
+          <div className="anatomy-center-bottle">
+            <div className="bottle-radial-glow" />
+            <div
+              className="bottle-floating-wrap"
+              style={{
+                transform: `translate3d(0, ${mouseOffset.y}px, 0)`
+              }}
+            >
+              <img
+                src="/assets/hero-1.png"
+                alt="ELHSAN Signature No. 1 Flacon"
+                className="anatomy-bottle-img"
+              />
+            </div>
+          </div>
 
-            <div className="space-y-7">
-              {steps.map((step, idx) => {
-                const Icon = step.icon;
-                return (
-                  <div key={idx} className="flex gap-5 group">
-                    <div className="flex flex-col items-center">
-                      <div className="w-10 h-10 rounded-full border border-gold/40 bg-white flex items-center justify-center text-gold-muted group-hover:bg-gold group-hover:text-espresso-900 transition-all duration-300 shrink-0 shadow-xs">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      {idx < steps.length - 1 && (
-                        <div className="w-px flex-1 bg-gold/25 mt-3" />
-                      )}
-                    </div>
-                    <div className="pb-6">
-                      <p className="text-[10px] text-gold-muted uppercase tracking-widest font-semibold mb-1">Step {step.step}</p>
-                      <h4 className="font-serif text-lg text-espresso-900 font-medium mb-1.5">{step.title}</h4>
-                      <p className="text-sm text-espresso-600 font-light leading-relaxed">{step.text}</p>
-                    </div>
-                  </div>
-                );
-              })}
+          {/* Right Features Column */}
+          <div className="anatomy-features-col right-features">
+            {/* Feature 2 */}
+            <div className="anatomy-feature-item right-item item-top point-anim-2">
+              <div className="feature-connector-line right-line">
+                <span className="connector-dot" />
+              </div>
+              <div className="feature-text-block">
+                <h4 className="feature-item-heading font-cinzel">Rare Natural Essences</h4>
+                <p className="feature-item-desc font-sans">
+                  Hand-selected Calabrian bergamot, velvet Grasse orris root, and Baltic amber.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 4 */}
+            <div className="anatomy-feature-item right-item item-middle point-anim-4">
+              <div className="feature-connector-line right-line">
+                <span className="connector-dot" />
+              </div>
+              <div className="feature-text-block">
+                <h4 className="feature-item-heading font-cinzel">Six-Week Barrel Maturation</h4>
+                <p className="feature-item-desc font-sans">
+                  Aged in micro-batches to allow delicate botanical resins to meld into perfection.
+                </p>
+              </div>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="anatomy-feature-item right-item item-bottom point-anim-6">
+              <div className="feature-connector-line right-line">
+                <span className="connector-dot" />
+              </div>
+              <div className="feature-text-block">
+                <h4 className="feature-item-heading font-cinzel">Skin-Safe &amp; Pure</h4>
+                <p className="feature-item-desc font-sans">
+                  Strict IFRA compliance, dermatologist certified, and free of harsh parabens.
+                </p>
+              </div>
             </div>
           </div>
         </div>

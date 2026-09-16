@@ -1,155 +1,109 @@
 import React from 'react';
-import { Instagram, Facebook, Twitter, Mail, Phone, MapPin, Sparkles } from 'lucide-react';
+import { Phone, Mail, MapPin, Globe } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const y = el.getBoundingClientRect().top + window.pageYOffset - 80;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <footer className="bg-[#F7F3EB] text-espresso-700 border-t border-gold/25">
-      {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
+    <footer className="fyn-footer-section" id="contact">
+      <div className="fyn-footer-container">
+        {/* Main 3-Column Grid */}
+        <div className="fyn-footer-main-grid">
+          {/* Left Column: Direct Contact & Concierge */}
+          <div className="footer-col footer-contact-col">
+            <div className="footer-contact-item">
+              <span className="footer-contact-icon">
+                <Phone size={18} />
+              </span>
+              <a href="tel:+923001234567" className="footer-contact-link font-sans">
+                +92 300 1234567
+              </a>
+            </div>
+
+            <div className="footer-contact-item">
+              <span className="footer-contact-icon">
+                <Mail size={18} />
+              </span>
+              <a href="mailto:concierge@elhsanparfums.com" className="footer-contact-link font-sans">
+                concierge@elhsanparfums.com
+              </a>
+            </div>
+
+            <div className="footer-contact-item">
+              <span className="footer-contact-icon">
+                <MapPin size={18} />
+              </span>
+              <span className="footer-contact-text font-sans">
+                ELHSAN Atelier, Luxury Avenue, Gulberg III, Lahore
+              </span>
+            </div>
+          </div>
+
+          {/* Center Column: Logo, Brand & Social Links */}
+          <div className="footer-col footer-brand-center">
+            <div className="footer-logo-brand-wrap">
               <img
                 src="/assets/logo.png"
-                alt="ELHSAN Logo"
-                className="h-10 w-auto object-contain filter drop-shadow-xs"
+                alt="ELHSAN Parfums Logo"
+                className="footer-logo-img"
               />
-              <div className="flex flex-col justify-center leading-none">
-                <span className="font-serif text-xl tracking-[0.24em] font-medium text-espresso-900 uppercase">
-                  ELHSAN
-                </span>
-                <span className="text-[8px] uppercase tracking-[0.38em] text-gold-muted font-medium mt-1">
-                  HAUTE PARFUMERIE
-                </span>
-              </div>
+              <span className="font-cinzel text-lg tracking-[0.25em] font-semibold text-[#f5ecd8] mt-3">
+                ELHSAN PARFUMS
+              </span>
+              <span className="text-[10px] tracking-[0.3em] text-[#c4a162] font-sans uppercase mt-1">
+                SCENT THAT STAYS
+              </span>
             </div>
 
-            <p className="text-sm text-espresso-600 font-light leading-relaxed mb-6">
-              Born from a singular pursuit — the creation of fragrances that transcend the ordinary.
-              Artisanal. Purposeful. Eternal.
+            <div className="footer-social-icons-row">
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/923001234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-btn"
+                aria-label="WhatsApp Concierge"
+              >
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z" />
+                </svg>
+              </a>
+
+              {/* Instagram */}
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-btn"
+                aria-label="Instagram"
+              >
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                </svg>
+              </a>
+
+              {/* Website / Global */}
+              <a
+                href="#hero"
+                className="footer-social-btn"
+                aria-label="Official Website"
+              >
+                <Globe size={17} />
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column: Editorial Quote */}
+          <div className="footer-col footer-narrative-col">
+            <p className="footer-narrative-quote font-editorial">
+              “A true signature fragrance is an eternal signature — an intimate reflection of your nobility and confidence.”
             </p>
-
-            {/* Newsletter */}
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-espresso-800 mb-2.5 font-semibold">
-                Join the Inner Circle
-              </p>
-              <div className="flex shadow-xs">
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="flex-1 px-3.5 py-2.5 bg-white border border-gold/30 text-espresso-900 text-xs placeholder:text-espresso-400 focus:outline-none focus:border-gold transition-colors"
-                />
-                <button className="px-4.5 py-2.5 bg-espresso-900 hover:bg-gold text-ivory-50 hover:text-espresso-900 text-xs font-bold uppercase transition-colors cursor-pointer">
-                  Join
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Navigation */}
-          <div>
-            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold-muted font-semibold mb-5">
-              The House
-            </h4>
-            <ul className="space-y-3 text-sm">
-              {[
-                { label: 'Home', section: 'hero' },
-                { label: 'Collections', section: 'collections' },
-                { label: 'Fragrance Catalog', section: 'products' },
-                { label: 'Brand Story', section: 'brand-story' },
-                { label: 'Craftsmanship', section: 'craftsmanship' },
-                { label: 'Client Reviews', section: 'reviews' },
-              ].map((link) => (
-                <li key={link.label}>
-                  <button
-                    onClick={() => scrollToSection(link.section)}
-                    className="text-espresso-600 hover:text-espresso-900 hover:underline transition-colors cursor-pointer text-sm font-light"
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Customer Care */}
-          <div>
-            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold-muted font-semibold mb-5">
-              Client Services
-            </h4>
-            <ul className="space-y-3 text-sm text-espresso-600 font-light">
-              <li>Free Express Delivery</li>
-              <li>Artisanal Gift Packaging</li>
-              <li>Cash on Delivery (COD)</li>
-              <li>Easy 7-Day Returns</li>
-              <li>Authentic Essences Guarantee</li>
-              <li>Cruelty-Free Certified</li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h4 className="text-[10px] uppercase tracking-ultra-wide text-gold-muted font-semibold mb-5">
-              Contact the Atelier
-            </h4>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-gold-muted shrink-0 mt-0.5" />
-                <span className="text-espresso-600 font-light">+92 300 0000000</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-gold-muted shrink-0 mt-0.5" />
-                <span className="text-espresso-600 font-light">hello@elhsan.com</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-gold-muted shrink-0 mt-0.5" />
-                <span className="text-espresso-600 font-light">Lahore, Pakistan</span>
-              </li>
-            </ul>
-
-            {/* Social Links */}
-            <div className="flex gap-3 mt-6">
-              {[
-                { icon: Instagram, label: 'Instagram' },
-                { icon: Facebook, label: 'Facebook' },
-                { icon: Twitter, label: 'Twitter/X' },
-              ].map(({ icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-full border border-gold/35 bg-white flex items-center justify-center text-espresso-700 hover:text-espresso-900 hover:border-gold hover:bg-champagne-light/50 transition-all duration-300 shadow-xs"
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-ivory-300/80 py-5 px-4 bg-[#F2EDE3]">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-espresso-500">
-          <div className="flex items-center gap-1.5">
-            <Sparkles className="w-3 h-3 text-gold-muted" />
-            <span>&copy; {new Date().getFullYear()} ELHSAN Haute Parfumerie. All rights reserved.</span>
-          </div>
-          <div className="flex gap-6 font-medium">
-            <span className="hover:text-espresso-900 transition-colors cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-espresso-900 transition-colors cursor-pointer">Terms of Service</span>
-            <span className="hover:text-espresso-900 transition-colors cursor-pointer">Ingredient Policy</span>
-          </div>
+        {/* Bottom Bar */}
+        <div className="fyn-footer-bottom-bar">
+          <p className="footer-copyright-text font-sans">
+            &copy; {new Date().getFullYear()} ELHSAN PARFUMS. ALL RIGHTS RESERVED. HAUTE PARFUMERIE PRIVÉE.
+          </p>
         </div>
       </div>
     </footer>

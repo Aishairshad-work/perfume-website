@@ -95,7 +95,7 @@ export const CartDrawer: React.FC = () => {
                 <button
                   onClick={() => {
                     setIsCartOpen(false);
-                    const el = document.getElementById('products');
+                    const el = document.getElementById('collection') || document.getElementById('products');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }}
                   className="mt-2 px-6 py-3 bg-espresso-900 hover:bg-gold text-ivory-50 hover:text-espresso-900 text-xs font-semibold uppercase tracking-widest transition-all cursor-pointer shadow-sm"
