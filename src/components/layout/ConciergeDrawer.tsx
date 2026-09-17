@@ -1,5 +1,7 @@
 import React from 'react';
-import { X, Phone, MessageCircle, Mail, MapPin, Clock, ExternalLink } from 'lucide-react';
+import { X, Phone, MessageCircle, Mail, MapPin, Clock, Globe, Heart } from 'lucide-react';
+import { useCurrency } from '../../context/CurrencyContext';
+import { useCart } from '../../context/CartContext';
 
 interface ConciergeDrawerProps {
   isOpen: boolean;
@@ -12,6 +14,8 @@ export const ConciergeDrawer: React.FC<ConciergeDrawerProps> = ({
   onClose,
   onNavigate
 }) => {
+  const { currency, toggleCurrency } = useCurrency();
+  const { wishlist, setIsWishlistOpen } = useCart();
   return (
     <div
       className={`luxury-drawer-backdrop ${isOpen ? 'drawer-open' : ''}`}
@@ -71,6 +75,34 @@ export const ConciergeDrawer: React.FC<ConciergeDrawerProps> = ({
                   <span className="text-[#b8860b] opacity-0 group-hover:opacity-100 transition-opacity">→</span>
                 </button>
               ))}
+            </div>
+          </div>
+
+          {/* Currency & Saved Creations Block */}
+          <div className="concierge-card-block">
+            <span className="concierge-block-heading font-cinzel">PREFERENCES & CREATIONS</span>
+            <div className="flex items-center justify-between gap-3 pt-1">
+              <button
+                onClick={toggleCurrency}
+                className="flex-1 flex items-center justify-between gap-2 px-3 py-2 border border-[#d2c3af]/60 rounded-lg text-xs font-semibold text-[#2c251b] hover:border-[#b8860b] bg-white transition-all shadow-sm"
+              >
+                <div className="flex items-center gap-1.5">
+                  <Globe size={14} className="text-[#b8860b]" />
+                  <span>Currency: {currency}</span>
+                </div>
+                <span className="text-[10px] text-[#8c6200] font-sans">SWITCH</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  onClose();
+                  setIsWishlistOpen(true);
+                }}
+                className="flex items-center gap-2 px-3 py-2 border border-[#d2c3af]/60 rounded-lg text-xs font-semibold text-[#2c251b] hover:border-[#b8860b] bg-white transition-all shadow-sm"
+              >
+                <Heart size={14} className="text-[#b8860b]" />
+                <span>Wishlist ({wishlist.length})</span>
+              </button>
             </div>
           </div>
 

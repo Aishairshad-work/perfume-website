@@ -109,7 +109,7 @@ export const PERFUMES_DATA: Product[] = [
     badge: '-15% OFF',
     rating: 4.9,
     reviewsCount: 220,
-    image: '/assets/product3.png',
+    image: '/assets/aseel.png',
     description: 'A glowing amber elixir captured inside a diamond-faceted crystal flacon. An extravagant dance of golden saffron, roasted praline, and warm cedar resin that warms like liquid silk.',
     story: 'Distilled with high-concentration parfum oils to create an intimate, intoxicating aura. Aseel represents pure luxury in its most concentrated, artisanal manifestation.',
     notes: {

@@ -23,7 +23,7 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'elhsan-signature-50',
     name: 'ELHSAN Signature No. 1',
-    watermark: 'SIGNATURE NO. 1',
+    watermark: 'ELHSAN',
     watermarkScale: 'clamp(3.8rem, 8.5vw, 8.2rem)',
     volume: '50ML e 1.7 fl.oz.',
     pricePKR: 1200,
@@ -37,7 +37,7 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'elhsan-imperial-100',
     name: 'ELHSAN Imperial Reserve',
-    watermark: 'IMPERIAL RESERVE',
+    watermark: 'ELHSAN',
     watermarkScale: 'clamp(3.4rem, 7.8vw, 7.5rem)',
     volume: '100ML e 3.4 fl.oz.',
     pricePKR: 1900,
@@ -51,7 +51,7 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'elhsan-desire-blue',
     name: 'Dunhill Desire Blue D.V.',
-    watermark: 'DESIRE BLUE D.V.',
+    watermark: 'Dunhill',
     watermarkScale: 'clamp(3.5rem, 8vw, 7.8rem)',
     volume: '50ML e 1.7 fl.oz.',
     pricePKR: 1600,
@@ -65,13 +65,13 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     id: 'elhsan-aseel-crystal',
     name: 'Aseel Precious Extrait',
-    watermark: 'ASEEL PRÉCIEUX',
+    watermark: 'ASEEL',
     watermarkScale: 'clamp(3.6rem, 8vw, 8rem)',
     volume: '50ML e 1.7 fl.oz.',
     pricePKR: 1850,
     priceUSD: 88,
     description: 'A glowing amber elixir inside a diamond-faceted crystal flacon. An extravagant dance of golden saffron, roasted praline, and warm cedar resin.',
-    image: '/assets/product3.png',
+    image: '/assets/aseel.png',
     frontTilt: -11,
     backTilt: 15,
     glowColor: 'rgba(215, 120, 50, 0.25)'
@@ -85,15 +85,28 @@ interface HeroProps {
 export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
   const { totalCount, setIsCartOpen, setIsWishlistOpen, wishlist, addToCart } = useCart();
   const { currency, toggleCurrency, formatPrice } = useCurrency();
 
-  // Scroll detection for sticky navbar transition
+  // Scroll detection for sticky navbar transition and active section tracking
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY || document.documentElement.scrollTop || window.pageYOffset || 0;
       setIsScrolled(scrollPos > 30);
+
+      const sectionIds = ['contact', 'craftsmanship', 'about', 'collection', 'hero'];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 250) {
+            setActiveSection(id);
+            break;
+          }
+        }
+      }
     };
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -155,53 +168,43 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
       {/* Parchment Top Navbar */}
       <header className={`parchment-top-navbar ${isScrolled ? 'is-sticky-scrolled' : ''}`}>
         <div className="navbar-logo-solo">
-          <a href="#hero" title="ELHSAN PARFUMS" className="flex items-center gap-3">
+          <a href="#hero" title="ELHSAN PARFUMS" className="flex items-center">
             <img
               src="/assets/logo.png"
               alt="ELHSAN Logo"
               className="solo-logo-img"
             />
-            <div className="hidden sm:flex flex-col text-left">
-              <span className="font-cinzel text-xs tracking-[0.25em] font-semibold text-[#1a1815]">ELHSAN</span>
-              <span className="text-[9px] tracking-[0.3em] text-[#8c6200] font-sans">PARFUMS</span>
-            </div>
           </a>
         </div>
 
         <nav className="navbar-center-menu">
-          <a href="#hero" className="nav-menu-link active">Home</a>
-          <a href="#collection" className="nav-menu-link">Collection</a>
-          <a href="#about" className="nav-menu-link">About</a>
-          <a href="#craftsmanship" className="nav-menu-link">Craftsmanship</a>
-          <a href="#moments" className="nav-menu-link">Moments</a>
-          <a href="#atelier" className="nav-menu-link">Atelier</a>
-          <a href="#faq" className="nav-menu-link">FAQ</a>
+          <a
+            href="#hero"
+            className={`nav-menu-link ${activeSection === 'hero' ? 'active' : ''}`}
+          >
+            Home
+          </a>
+          <a
+            href="#collection"
+            className={`nav-menu-link ${activeSection === 'collection' ? 'active' : ''}`}
+          >
+            Collection
+          </a>
+          <a
+            href="#about"
+            className={`nav-menu-link ${activeSection === 'about' ? 'active' : ''}`}
+          >
+            About
+          </a>
+          <a
+            href="#contact"
+            className={`nav-menu-link ${activeSection === 'contact' ? 'active' : ''}`}
+          >
+            Contact
+          </a>
         </nav>
 
         <div className="navbar-right-utils">
-          {/* Currency Toggle */}
-          <button
-            onClick={toggleCurrency}
-            className="flex items-center gap-1 text-[11px] font-sans font-semibold tracking-wider text-[#4a4036] hover:text-[#b8860b] px-2.5 py-1 rounded-full border border-[#d2c3af]/60 bg-white/70 hover:bg-white transition-all"
-            title="Switch Currency"
-          >
-            <Globe size={13} className="text-[#b8860b]" />
-            <span>{currency}</span>
-          </button>
-
-          {/* Wishlist Button */}
-          <button
-            className="nav-cart-btn-icon relative"
-            onClick={() => setIsWishlistOpen(true)}
-            title="Saved Creations"
-            aria-label="Wishlist"
-          >
-            <Heart size={21} strokeWidth={1.7} />
-            {wishlist.length > 0 && (
-              <span className="cart-mini-count">{wishlist.length}</span>
-            )}
-          </button>
-
           {/* Shopping Bag Button */}
           <button
             className="nav-cart-btn-icon"
@@ -209,7 +212,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
             title="Shopping Bag"
             aria-label="Shopping Bag"
           >
-            <ShoppingBag size={23} strokeWidth={1.7} />
+            <ShoppingBag size={24} strokeWidth={1.7} />
             {totalCount > 0 && (
               <span className="cart-mini-count">{totalCount}</span>
             )}
@@ -219,10 +222,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenConcierge }) => {
           <button
             className="nav-menu-btn-icon"
             onClick={() => onOpenConcierge && onOpenConcierge()}
-            aria-label="Open Concierge &amp; Contact Panel"
-            title="Menu &amp; Concierge"
+            aria-label="Open Concierge & Contact Panel"
+            title="Menu & Concierge"
           >
-            <Menu size={25} strokeWidth={1.8} />
+            <Menu size={26} strokeWidth={1.8} />
           </button>
         </div>
       </header>

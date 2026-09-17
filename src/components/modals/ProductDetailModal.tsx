@@ -52,6 +52,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ onAddToC
     }, 1800);
   };
 
+  const olfactoryNotes = quickViewProduct.notes 
+    ? `${quickViewProduct.notes.top.join(', ')} · ${quickViewProduct.notes.heart.join(', ')} · ${quickViewProduct.notes.base.join(', ')}`
+    : quickViewProduct.category.replace(/•/g, '·');
+
   return (
     <div
       className="fyn-modal-overlay"
@@ -78,6 +82,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ onAddToC
           <div className="fyn-modal-visual-col">
             <div className="fyn-modal-stage">
               <div className="modal-sunlight-aura" />
+              {/* Bottle Wrap (z-index: 3, in FRONT of pedestal) */}
               <div className="modal-bottle-wrap">
                 <img
                   src={quickViewProduct.image}
@@ -85,36 +90,37 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ onAddToC
                   className="modal-bottle-img"
                 />
               </div>
-              <div className="travertine-pedestal-slab" style={{ backgroundColor: '#e0d2bf' }}>
-                <div className="slab-top-bevel" />
-                <div className="bottle-travertine-shadow" />
+              {/* Pedestal Slab (z-index: 2, BEHIND bottle) */}
+              <div className="modal-pedestal-slab">
+                <div className="modal-slab-bevel" />
+                <div className="modal-slab-shadow" />
               </div>
             </div>
           </div>
 
           {/* Info Column */}
           <div className="fyn-modal-info-col">
-            <span className="modal-kicker font-sans">HAUTE PARFUMERIE</span>
+            <span className="modal-kicker">HAUTE PARFUMERIE</span>
             <div className="modal-title-row">
-              <h2 className="modal-product-title font-cinzel">{quickViewProduct.name}</h2>
+              <h2 className="modal-product-title">{quickViewProduct.name}</h2>
             </div>
-            <span className="modal-subtitle font-sans">
-              {quickViewProduct.type} &bull; {quickViewProduct.volume}
+            <span className="modal-subtitle">
+              {quickViewProduct.type ? quickViewProduct.type.toUpperCase() : 'EXTRAIT DE PARFUM'} · {quickViewProduct.volume.toUpperCase()}
             </span>
 
-            <div className="modal-price-tag font-sans font-semibold">
+            <div className="modal-price-tag">
               {formatPrice(quickViewProduct.price, quickViewProduct.pricePKR)}
             </div>
 
-            <p className="modal-desc-text font-sans">
+            <p className="modal-desc-text">
               {quickViewProduct.description}
             </p>
 
             {/* Olfactory Notes Box */}
             <div className="modal-notes-box">
-              <span className="modal-notes-label font-sans">OLFACTORY NOTES:</span>
-              <p className="modal-notes-val font-sans">
-                {quickViewProduct.category} &bull; {quickViewProduct.accords.join(', ')}
+              <span className="modal-notes-label">OLFACTORY NOTES:</span>
+              <p className="modal-notes-val">
+                {olfactoryNotes}
               </p>
             </div>
 
@@ -129,7 +135,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ onAddToC
                 >
                   −
                 </button>
-                <span className="step-val font-sans font-semibold px-2">{quantity}</span>
+                <span className="step-val">{quantity}</span>
                 <button
                   type="button"
                   className="step-btn"
@@ -141,7 +147,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ onAddToC
               </div>
 
               <button
-                className={`modal-add-to-bag-btn font-cinzel tracking-widest ${isAdded ? 'is-added' : ''}`}
+                className={`modal-add-to-bag-btn ${isAdded ? 'is-added' : ''}`}
                 onClick={handleAddToCart}
               >
                 {isAdded ? (

@@ -37,14 +37,16 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Center Column: Logo, Brand & Social Links */}
+          {/* Center Column: Golden Logo, Brand & Social Links */}
           <div className="footer-col footer-brand-center">
             <div className="footer-logo-brand-wrap">
-              <img
-                src="/assets/logo.png"
-                alt="ELHSAN Parfums Logo"
-                className="footer-logo-img"
-              />
+              <a href="#hero" className="flex flex-col items-center group cursor-pointer" aria-label="ELHSAN Home">
+                <img
+                  src="/assets/logo.png"
+                  alt="ELHSAN Parfums Logo"
+                  className="footer-logo-img gold-footer-logo"
+                />
+              </a>
               <span className="font-cinzel text-lg tracking-[0.25em] font-semibold text-[#f5ecd8] mt-3">
                 ELHSAN PARFUMS
               </span>

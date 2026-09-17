@@ -41,3 +41,468 @@
     filter: drop-shadow(0 22px 28px rgba(38, 31, 27, 0.18)) drop-shadow(0 8px 12px rgba(197, 160, 89, 0.12));
   }
 }
+
+
+
+
+/* ==========================================================================
+   RADIANT METALLIC GOLD FOOTER LOGO (MATCHING REFERENCE FYN)
+   ========================================================================== */
+
+.footer-logo-img,
+.gold-footer-logo {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(80%) sepia(60%) saturate(800%) hue-rotate(5deg) brightness(105%) contrast(105%) drop-shadow(0 4px 18px rgba(229, 193, 88, 0.6)) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+}
+
+.footer-logo-img:hover,
+.gold-footer-logo:hover {
+  transform: scale(1.06);
+  filter: brightness(0) saturate(100%) invert(88%) sepia(65%) saturate(900%) hue-rotate(5deg) brightness(115%) contrast(110%) drop-shadow(0 6px 26px rgba(229, 193, 88, 0.8)) !important;
+}
+
+@media (max-width: 520px) {
+  .footer-logo-img,
+  .gold-footer-logo {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+
+/* ==========================================================================
+   QUICK VIEW / PRODUCT POPUP MODAL (MATCHING REFERENCE FYN)
+   ========================================================================== */
+
+.fyn-modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+  background: rgba(18, 14, 10, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.fyn-modal-container {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  max-height: calc(100vh - 40px);
+  background: #fdfbf7;
+  border: 1px solid #e7dcce;
+  border-radius: 20px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  animation: modalScaleUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.fyn-modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #f3ede2;
+  border: 1px solid rgba(196, 161, 98, 0.3);
+  color: #1a1610;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.2s ease;
+}
+
+.fyn-modal-close-btn:hover {
+  background: #1a1610;
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.fyn-modal-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  min-height: 420px;
+}
+
+.fyn-modal-visual-col {
+  position: relative;
+  background: linear-gradient(145deg, #f7efe2, #ebe0cf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 20px;
+  overflow: hidden;
+  border-right: 1px solid #ebdccb;
+}
+
+.fyn-modal-stage {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.modal-sunlight-aura {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246, 214, 150, 0.45) 0%, rgba(246, 214, 150, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Bottle Wrap: z-index 3 (HIGHEST) so it sits IN FRONT of pedestal */
+.modal-bottle-wrap {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: -10px;
+}
+
+.modal-bottle-img {
+  max-width: 175px;
+  max-height: 235px;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 22px rgba(45, 35, 20, 0.24));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-bottle-wrap:hover .modal-bottle-img {
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* Pedestal Slab: z-index 2 (MIDDLE) behind bottle */
+.modal-pedestal-slab {
+  position: relative;
+  width: 190px;
+  height: 18px;
+  border-radius: 4px;
+  background-color: #ded1be;
+  z-index: 2;
+  box-shadow: 0 10px 20px rgba(35, 25, 15, 0.12);
+}
+
+.modal-slab-bevel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 4px 4px 0 0;
+}
+
+.modal-slab-shadow {
+  position: absolute;
+  bottom: -6px;
+  left: 10%;
+  width: 80%;
+  height: 8px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.28) 0%, transparent 70%);
+}
+
+.fyn-modal-info-col {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.modal-kicker {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #927546;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.modal-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 3px;
+  flex-wrap: wrap;
+}
+
+.modal-product-title {
+  font-family: Playfair Display, Cinzel, serif;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: #1a1610;
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.modal-urdu-title {
+  font-family: Amiri, Traditional Arabic, serif;
+  font-size: 1.25rem;
+  color: #927546;
+  font-weight: 500;
+}
+
+.modal-subtitle {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #8c7e6c;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.modal-price-tag {
+  font-family: Montserrat, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1610;
+  margin-bottom: 12px;
+}
+
+.modal-desc-text {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #554838;
+  margin: 0 0 14px;
+}
+
+.modal-notes-box {
+  background: #f7f1e6;
+  border-left: 2px solid #c4a162;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.modal-notes-label {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #927546;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.modal-notes-val {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #2b2319;
+  margin: 0;
+}
+
+.modal-action-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-quantity-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #dcd1c0;
+  border-radius: 4px;
+  background: #fff;
+  height: 38px;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.step-btn {
+  width: 30px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #5c503e;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+
+.step-btn:hover {
+  background: #f4ece0;
+  color: #1a1610;
+}
+
+.step-val {
+  font-family: Montserrat, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1610;
+  padding: 0 10px;
+  min-width: 14px;
+  text-align: center;
+  border-left: 1px solid #f0e6d6;
+  border-right: 1px solid #f0e6d6;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-add-to-bag-btn {
+  flex: 1;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #1a1610;
+  color: #fff;
+  border: 1px solid #1a1610;
+  border-radius: 4px;
+  font-family: Montserrat, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: all 0.22s ease;
+}
+
+.modal-add-to-bag-btn:hover {
+  background: #967645;
+  border-color: #967645;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(150, 118, 69, 0.35);
+}
+
+.modal-add-to-bag-btn.is-added {
+  background: #2e6644;
+  border-color: #2e6644;
+}
+
+@media (max-width: 768px) {
+  .fyn-modal-body-grid {
+    grid-template-columns: 1fr;
+  }
+  .fyn-modal-visual-col {
+    padding: 24px 16px 20px;
+    border-right: none;
+    border-bottom: 1px solid #ebdccb;
+  }
+  .fyn-modal-stage {
+    height: 220px;
+  }
+  .modal-bottle-img {
+    max-height: 165px;
+  }
+  .fyn-modal-info-col {
+    padding: 24px 18px;
+  }
+  .modal-product-title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fyn-modal-overlay {
+    padding: 10px;
+  }
+  .fyn-modal-container {
+    border-radius: 16px;
+  }
+  .modal-action-row {
+    flex-direction: row;
+    gap: 8px;
+  }
+  .modal-quantity-stepper {
+    height: 36px;
+  }
+  .modal-add-to-bag-btn {
+    height: 36px;
+    font-size: 0.72rem;
+  }
+}
+
+
+
+
+/* ==========================================================================
+   PINK ROSE ROLL-ON (MAISON ROSE) IMAGE SIZE & POSITION NORMALIZATION
+   ========================================================================== */
+
+img[src*="product1.png"].editorial-bottle-img,
+.editorial-bottle-img[src*="product1.png"] {
+  transform: scale(1.92) translateY(3px);
+  transform-origin: center center;
+}
+
+.editorial-product-card:hover img[src*="product1.png"].editorial-bottle-img,
+.editorial-product-card:hover .editorial-bottle-img[src*="product1.png"] {
+  transform: scale(2.03) translateY(-2px);
+  transform-origin: center center;
+}
+
+img[src*="product1.png"].modal-bottle-img,
+.modal-bottle-img[src*="product1.png"] {
+  transform: scale(1.88) translateY(2px);
+  transform-origin: center center;
+}
+
+.modal-bottle-wrap:hover img[src*="product1.png"].modal-bottle-img,
+.modal-bottle-wrap:hover .modal-bottle-img[src*="product1.png"] {
+  transform: scale(1.96) translateY(-2px);
+  transform-origin: center center;
+}
+
+img[src*="product1.png"].bottle-drop-shadow {
+  transform: scale(1.35) translateY(0);
+  transform-origin: center center;
+}
