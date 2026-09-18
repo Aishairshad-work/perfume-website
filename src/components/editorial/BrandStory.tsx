@@ -40,7 +40,7 @@ export const BrandStory: React.FC = () => {
             </div>
             <div className="collage-card card-bottom-left">
               <img
-                src="/assets/content1.JPG"
+                src="/assets/man-with-perfume.jpg"
                 alt="Sensorial Fragrance Journey"
                 className="collage-img"
               />

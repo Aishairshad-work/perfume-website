@@ -68,7 +68,7 @@ export const RefinedMoments: React.FC<RefinedMomentsProps> = ({ onExploreCollect
           <div className="moments-side-col left-col">
             <div className="moment-card card-fresh" onClick={handleExplore}>
               <img
-                src="/assets/content1.JPG"
+                src="/assets/moment-topleft.jpg"
                 alt="Fresh Daytime Fragrance"
                 className="moment-card-bg"
               />
@@ -84,9 +84,9 @@ export const RefinedMoments: React.FC<RefinedMomentsProps> = ({ onExploreCollect
 
             <div className="moment-card" onClick={handleExplore}>
               <img
-                src="/assets/product2.png"
+                src="/assets/moment-bottomleft.jpg"
                 alt="Pure Concentre Roll-On"
-                className="moment-card-bg object-contain bg-[#1f1a14] p-6"
+                className="moment-card-bg"
               />
               <div className="moment-card-overlay">
                 <p className="moment-card-copy font-sans">
@@ -103,7 +103,7 @@ export const RefinedMoments: React.FC<RefinedMomentsProps> = ({ onExploreCollect
           <div className="moments-center-col">
             <div className="moment-card card-center-hero" onClick={handleExplore}>
               <img
-                src="/assets/clone.png"
+                src="/assets/moment-center.jpg"
                 alt="ELHSAN Signature Masterpiece"
                 className="moment-card-bg"
               />
@@ -122,7 +122,7 @@ export const RefinedMoments: React.FC<RefinedMomentsProps> = ({ onExploreCollect
           <div className="moments-side-col right-col">
             <div className="moment-card" onClick={handleExplore}>
               <img
-                src="/assets/clone1.png"
+                src="/assets/moment-topright.jpg"
                 alt="Evening Opulence"
                 className="moment-card-bg"
               />
@@ -138,7 +138,7 @@ export const RefinedMoments: React.FC<RefinedMomentsProps> = ({ onExploreCollect
 
             <div className="moment-card" onClick={handleExplore}>
               <img
-                src="/assets/content.JPG"
+                src="/assets/moment-bottomright.jpg"
                 alt="Artisanal Heritage"
                 className="moment-card-bg"
               />

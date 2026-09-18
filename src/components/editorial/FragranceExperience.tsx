@@ -39,7 +39,7 @@ export const FragranceExperience: React.FC<FragranceExperienceProps> = ({ onExpl
       {/* Background Parallax Layer */}
       <div className="parallax-bg-layer" ref={bgRef}>
         <img
-          src="/assets/content.JPG"
+          src="/assets/content-three-perfume.jpg"
           alt="ELHSAN Haute Parfumerie Reserve"
           className="parallax-bg-image"
         />
